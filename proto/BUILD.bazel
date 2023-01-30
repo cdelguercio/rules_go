@@ -40,6 +40,18 @@ go_proto_compiler(
 )
 
 go_proto_compiler(
+    name = "go_grpc_gateway",
+    options = ["--go-grpc_out=."],
+    visibility = ["//visibility:public"],
+    deps = PROTO_RUNTIME_DEPS + WELL_KNOWN_TYPES_APIV2 + [
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes:go_default_library",
+        "@org_golang_google_grpc//status:go_default_library",
+        "@org_golang_x_net//context:go_default_library",
+    ],
+)
+
+go_proto_compiler(
     name = "go_proto_validate",
     plugin = "@com_github_mwitkow_go_proto_validators//protoc-gen-govalidators",
     suffix = ".validator.pb.go",
